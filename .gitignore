@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Production / Build output
+dist/
+build/
+
+# Environment variables (Sensitive Data)
+.env
+.env.local
+.env.production
+
+# IDEs and Editors
+.vscode/
+.idea/
+
+# Logs and System Files
+*.log
+.DS_Store
