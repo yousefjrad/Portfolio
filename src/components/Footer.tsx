@@ -21,10 +21,13 @@ export function Footer() {
             © {new Date().getFullYear()} {profile.name}. All rights reserved.
           </p>
           <nav aria-label="Footer">
-            <ul className="flex flex-wrap justify-center gap-5 text-sm">
+            <ul className="flex flex-wrap justify-center gap-x-2 text-sm">
               {navLinks.map((l) => (
                 <li key={l.id}>
-                  <a href={`#${l.id}`} className="text-muted transition-colors hover:text-[var(--accent)]">
+                  <a
+                    href={`#${l.id}`}
+                    className="text-muted inline-flex min-h-11 items-center px-2 transition-colors hover:text-[var(--accent)]"
+                  >
                     {l.label}
                   </a>
                 </li>

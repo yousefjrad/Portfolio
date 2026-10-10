@@ -22,8 +22,16 @@ export function Navbar({ active, theme, onToggleTheme }: Props) {
   }, [])
 
   const go = (id: string) => {
-    setOpen(false)
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    const target = document.getElementById(id)
+    if (!target) return
+    if (open) {
+      // On mobile, starting a smooth scroll in the same frame that the menu collapses
+      // gets cancelled by the browser. Close the menu first, then scroll.
+      setOpen(false)
+      window.setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 60)
+    } else {
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
   }
 
   return (
@@ -41,7 +49,7 @@ export function Navbar({ active, theme, onToggleTheme }: Props) {
       >
         <button
           onClick={() => go('home')}
-          className="text-lg font-bold tracking-tight"
+          className="min-h-11 text-lg font-bold tracking-tight"
           style={{ color: 'var(--heading)' }}
           aria-label={`${profile.name} – back to top`}
         >

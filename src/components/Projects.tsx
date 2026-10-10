@@ -20,14 +20,20 @@ function ProjectShot({ project }: { project: Project }) {
   const src = shotFor(project.id)
   if (src) {
     return (
-      <img
-        src={src}
-        alt={`${project.title} interface preview`}
-        loading="lazy"
-        decoding="async"
-        className="mb-5 w-full rounded-xl border object-cover"
-        style={{ borderColor: 'var(--border)' }}
-      />
+      // Fixed aspect ratio reserves the space up front, so lazy-loaded images
+      // never push the page down (which made anchor scrolling land short on mobile).
+      <div
+        className="mb-5 aspect-[2/1] w-full overflow-hidden rounded-xl border"
+        style={{ borderColor: 'var(--border)', background: 'var(--bg-alt)' }}
+      >
+        <img
+          src={src}
+          alt={`${project.title} interface preview`}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-contain"
+        />
+      </div>
     )
   }
   return <ScreenshotPlaceholder project={project} />
